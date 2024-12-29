@@ -1,12 +1,32 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+interface Hero {
+  id: number;
+  name: string;
+}
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'tour-of-heroes';
+  title = 'Tour of Heroes - Marvel Edition';
+  heroes: Hero[] = [
+    { id: 1, name: 'Homem de Ferro' },
+    { id: 2, name: 'Capitão América' },
+    { id: 3, name: 'Thor' },
+    { id: 4, name: 'Viúva Negra' },
+    { id: 5, name: 'Hulk' },
+    { id: 6, name: 'Homem-Aranha' },
+    { id: 7, name: 'Doutor Estranho' },
+    { id: 8, name: 'Pantera Negra' },
+    { id: 9, name: 'Capitã Marvel' },
+    { id: 10, name: 'Visão' }
+  ];
+
+
 }
