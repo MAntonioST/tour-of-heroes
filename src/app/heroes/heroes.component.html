@@ -1,13 +1,51 @@
-<h2>{{ hero.name | uppercase }} Details </h2>
-<div><span>id:</span>{{ hero.id }}</div>
-<div><span>name:</span>{{ hero.name }}</div>
+<div class="container" [ngClass]="{'home-background': !showList && !selectedHero}">
+  <!-- Tela inicial -->
+  <div *ngIf="!showList && !selectedHero" class="home-container">
+    <div class="content">
+      <h1>Catálogo de Heróis Marvel</h1>
+      <img [src]="heroImagePath" alt="Homem-Aranha" class="hero-image">
+      <p>
+        Explore o incrível universo dos super-heróis da Marvel! Descubra poderes,
+        identidades secretas e histórias épicas dos seus personagens favoritos.
+      </p>
+      <button (click)="showList = true" class="cta-button">Explorar Heróis</button>
+    </div>
+  </div>
 
+  <!-- Lista de heróis -->
+  <div *ngIf="showList && !selectedHero" class="hero-list-container">
+    <h2>Heróis da Marvel</h2>
+    <ul class="hero-list">
+      <li *ngFor="let hero of heroes" class="hero-item" (click)="onSelect(hero)">
+        <div class="hero-card">
+          <div class="hero-header">
+            <h3>{{ hero.alias }}</h3>
+          </div>
+          <div class="hero-body">
+            <p><strong>Nome Real:</strong> {{ hero.name }}</p>
+          </div>
+          <div class="hero-footer">
+            <span>#{{ hero.id }}</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <button (click)="showList = false" class="back-home-button">Voltar para Home</button>
+  </div>
 
-
-
-<div>
-  <label for="name">Hero name: </label>
-  <input id="name" [(ngModel)]="hero.name" type="text" placeholder="name">
+  <!-- Detalhes do herói -->
+  <div *ngIf="selectedHero" class="hero-details">
+    <h2>{{ selectedHero.alias | uppercase }}</h2>
+    <div class="hero-info">
+      <div><span>ID:</span> {{ selectedHero.id }}</div>
+      <div><span>Nome Real:</span> {{ selectedHero.name }}</div>
+      <div><span>Codinome:</span> {{ selectedHero.alias }}</div>
+      <div><span>Poderes:</span> {{ selectedHero.power }}</div>
+    </div>
+    <div class="hero-edit">
+      <label for="hero-name">Editar Nome Real:</label>
+      <input id="hero-name" [(ngModel)]="selectedHero.name" type="text" placeholder="Nome real do herói">
+    </div>
+    <button (click)="goBack()" class="back-button">Voltar para a Lista</button>
+  </div>
 </div>
-
-

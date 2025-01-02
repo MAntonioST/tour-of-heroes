@@ -2,6 +2,7 @@ import { CommonModule, UpperCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../model/heroes.model';
 import { FormsModule } from '@angular/forms';
+import { HeroService } from '../service/hero.service';
 
 
 
@@ -16,12 +17,24 @@ import { FormsModule } from '@angular/forms';
 
 export class HeroesComponent{
 
+  heroes: Hero[] = [];
+  selectedHero?: Hero;
+  showList = false;
+  heroImagePath = 'spiderman-background.jpg';
 
-  hero: Hero =
-    { id: 1,
-      name: 'Wolverine'
-    };
+  constructor(private heroService:HeroService) {}
 
+  ngOnInit(): void {
+    this.heroes = this.heroService.getHeroesMarvel();
+  }
+
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
+  }
+
+  goBack(): void {
+    this.selectedHero = undefined;
+  }
 
 
 }
