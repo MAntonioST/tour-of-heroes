@@ -2,6 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { Hero } from '../model/heroes.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class HeroService {
     { id: 12, name: 'Stephen Strange', alias: 'Doutor Estranho', power: 'Magia e manipulação de dimensões' }
   ];
 
-  getHeroesMarvel(): Hero[] {
-    return this.heroes;
+  getHeroesMarvel(): Observable<Hero[]> {
+    const heroes = of(this.heroes);
+    return heroes;
   }
 }

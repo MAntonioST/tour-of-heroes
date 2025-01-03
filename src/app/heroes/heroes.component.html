@@ -16,7 +16,7 @@
   <div *ngIf="showList" class="hero-list-container">
     <h2>Heróis da Marvel</h2>
     <ul class="hero-list">
-      <li *ngFor="let hero of heroes" class="hero-item" (click)="onSelect(hero)">
+      <li *ngFor="let hero of heroes$ |async" class="hero-item" (click)="onSelect(hero)">
         <div class="hero-card">
           <div class="hero-header">
             <h3>{{ hero.alias }}</h3>
