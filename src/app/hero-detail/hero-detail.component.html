@@ -1,0 +1,17 @@
+ <!-- Detalhes do herói -->
+ <div *ngIf="hero" class="hero-details">
+  <h2>{{ hero.alias | uppercase }}</h2>
+  <div class="hero-info">
+    <div><span>ID:</span> {{ hero.id }}</div>
+    <div><span>Nome Real:</span> {{ hero.name }}</div>
+    <div><span>Codinome:</span> {{ hero.alias }}</div>
+    <div><span>Poderes:</span> {{ hero.power }}</div>
+  </div>
+  <div class="hero-edit">
+    <label for="hero-name">Editar Nome Real:</label>
+    <input id="hero-name" [(ngModel)]="hero.name" type="text" placeholder="Nome real do herói">
+  </div>
+  <button (click)="goBack()" class="back-button">Voltar para a Lista</button>
+</div>
+
+

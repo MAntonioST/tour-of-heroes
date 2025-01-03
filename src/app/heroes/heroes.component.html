@@ -1,6 +1,6 @@
-<div class="container" [ngClass]="{'home-background': !showList && !selectedHero}">
+<div class="container" [ngClass]="{'home-background': !showList && !showDetails}">
   <!-- Tela inicial -->
-  <div *ngIf="!showList && !selectedHero" class="home-container">
+  <div *ngIf="!showList && !showDetails" class="home-container">
     <div class="content">
       <h1>Catálogo de Heróis Marvel</h1>
       <img [src]="heroImagePath" alt="Homem-Aranha" class="hero-image">
@@ -13,7 +13,7 @@
   </div>
 
   <!-- Lista de heróis -->
-  <div *ngIf="showList && !selectedHero" class="hero-list-container">
+  <div *ngIf="showList" class="hero-list-container">
     <h2>Heróis da Marvel</h2>
     <ul class="hero-list">
       <li *ngFor="let hero of heroes" class="hero-item" (click)="onSelect(hero)">
@@ -30,22 +30,14 @@
         </div>
       </li>
     </ul>
-    <button (click)="showList = false" class="back-home-button">Voltar para Home</button>
+    <button (click)="showList = false; showDetails = false;" class="back-home-button">Voltar para Home</button>
   </div>
 
   <!-- Detalhes do herói -->
-  <div *ngIf="selectedHero" class="hero-details">
-    <h2>{{ selectedHero.alias | uppercase }}</h2>
-    <div class="hero-info">
-      <div><span>ID:</span> {{ selectedHero.id }}</div>
-      <div><span>Nome Real:</span> {{ selectedHero.name }}</div>
-      <div><span>Codinome:</span> {{ selectedHero.alias }}</div>
-      <div><span>Poderes:</span> {{ selectedHero.power }}</div>
-    </div>
-    <div class="hero-edit">
-      <label for="hero-name">Editar Nome Real:</label>
-      <input id="hero-name" [(ngModel)]="selectedHero.name" type="text" placeholder="Nome real do herói">
-    </div>
-    <button (click)="goBack()" class="back-button">Voltar para a Lista</button>
-  </div>
+  <app-hero-detail
+    *ngIf="showDetails"
+    [hero]="selectedHero"
+    (returnToList)="onReturnToList()"
+    class="hero-details">
+  </app-hero-detail>
 </div>
