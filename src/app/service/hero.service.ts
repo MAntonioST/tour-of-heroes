@@ -1,14 +1,17 @@
 // src/app/hero.service.ts
 
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Hero } from '../model/heroes.model';
 import { Observable, of } from 'rxjs';
+import { MessagesService } from './messages.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class HeroService {
+
+  private messageService = inject(MessagesService);
 
   private heroes: Hero[] = [
     { id: 1, name: 'Logan', alias: 'Wolverine', power: 'Fator de cura e garras de adamantium' },
@@ -27,6 +30,7 @@ export class HeroService {
 
   getHeroesMarvel(): Observable<Hero[]> {
     const heroes = of(this.heroes);
+    this.messageService.add('HeroService: fetched heroes');
     return heroes;
   }
 }
